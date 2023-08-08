@@ -2,6 +2,8 @@ import './globals.css';
 
 import {Inter} from 'next/font/google';
 
+import Header from '@/components/Header';
+
 const inter = Inter({subsets: ['latin']});
 
 export const metadata = {
@@ -9,10 +11,17 @@ export const metadata = {
   description: '일단 연습용',
 };
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default function RootLayout(props: {
+  children: React.ReactNode;
+  modal: React.ReactNode;
+}) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Header />
+        {props.children}
+        {props.modal}
+      </body>
     </html>
   );
 }
