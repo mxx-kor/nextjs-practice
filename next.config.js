@@ -1,9 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    //for no route Type error
-    typedRoutes: true,
-  },
-};
+const nextConfig = {};
 
 module.exports = nextConfig;
