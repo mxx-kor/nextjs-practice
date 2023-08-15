@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@giphy/js-fetch-api": "^5.1.0",
+    "@giphy/js-types": "^4.4.0",
+    "@giphy/react-components": "^8.1.0",
     "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -17,14 +20,14 @@
     "@types/node": "20.4.4",
     "@types/react": "18.2.16",
     "@types/react-dom": "18.2.7",
-    "typescript": "5.1.6",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
+    "eslint": "8.45.0",
+    "eslint-config-next": "13.4.12",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "lint-staged": "^13.2.3",
-    "eslint": "8.45.0",
-    "eslint-config-next": "13.4.12"
+    "typescript": "5.1.6"
   }
 }
