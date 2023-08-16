@@ -1,29 +1,41 @@
 'use client';
-import {GiphyFetch} from '@giphy/js-fetch-api';
 import {IGif} from '@giphy/js-types';
-import {SyntheticEvent} from 'react';
+import {Box, Tab, Tabs} from '@mui/material';
+import {SyntheticEvent, useState} from 'react';
 
-import GifWrapper from '@/components/GifWrapper';
+import GifWrapper from '@/components/Giphy/GifWrapper';
 
 const Home = () => {
-  const giphyFetch = new GiphyFetch(
-    process.env.NEXT_PUBLIC_GIPHY_KEY as string,
-  );
-
+  const [value, setValue] = useState('one');
   const onClick = (gif: IGif, e: SyntheticEvent<HTMLElement, Event>) => {
     console.log('gif', gif);
     e.preventDefault();
     console.log('hi');
   };
+  const handleChange = (e: SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
   return (
-    <main>
-      <GifWrapper giphyFetch={giphyFetch} handleClick={onClick}>
-        <GifWrapper.Gif />
+    <Box height='100%'>
+      <GifWrapper handleClick={onClick}>
         <h2>고양이들</h2>
         <GifWrapper.Carousel />
+        <h2>Trending 📈</h2>
+        <Tabs
+          variant='fullWidth'
+          value={value}
+          onChange={handleChange}
+          textColor='secondary'
+          indicatorColor='secondary'
+          aria-label='gif and emoji tabs'
+          centered
+        >
+          <Tab value='one' label='Gif' />
+          <Tab value='two' label='Emoji' />
+        </Tabs>
         <GifWrapper.Grid />
       </GifWrapper>
-    </main>
+    </Box>
   );
 };
 
