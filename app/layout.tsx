@@ -1,8 +1,9 @@
-import './globals.css';
-
+import {Container} from '@mui/material';
 import {Inter} from 'next/font/google';
 
 import Header from '@/components/Header';
+
+import ThemeRegistry from './ThemeRegistry';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -18,9 +19,13 @@ export default function RootLayout(props: {
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <Header />
-        {props.children}
-        {props.modal}
+        <ThemeRegistry options={{key: 'mui'}}>
+          <Container maxWidth='md'>
+            <Header />
+            {props.children}
+            {props.modal}
+          </Container>
+        </ThemeRegistry>
       </body>
     </html>
   );
