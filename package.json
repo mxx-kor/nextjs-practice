@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@giphy/js-fetch-api": "^5.1.0",
     "@giphy/js-types": "^4.4.0",
     "@giphy/react-components": "^8.1.0",
+    "@mui/material": "^5.14.5",
     "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0"
