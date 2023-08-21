@@ -2,7 +2,8 @@
 import {Input, Stack} from '@mui/material';
 import Link from 'next/link';
 
-import GifWrapper from './giphy/GifWrapper';
+import GifWrapper from '../giphy/GifWrapper';
+import styles from './Header.module.css';
 
 const Header = () => {
   return (
@@ -20,10 +21,10 @@ const Header = () => {
         </Link>
         <Input />
         <Stack direction='row' gap={3}>
-          <Link href='/about'>
+          <Link className={styles.headerNav} href='/about'>
             <h2>about</h2>
           </Link>
-          <Link href='/login'>
+          <Link className={styles.headerNav} href='/login'>
             <h2>login</h2>
           </Link>
         </Stack>
