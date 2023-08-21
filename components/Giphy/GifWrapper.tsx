@@ -6,6 +6,7 @@ import {
   useContext,
 } from 'react';
 
+import EmojiGrid from './EmojiGrid';
 import GifCarousel from './GifCarousel';
 import GifDemo from './GifDemo';
 import GifGrid from './GifGrid';
@@ -35,5 +36,6 @@ export const useGifContext = () => {
 GifWrapper.Gif = GifDemo;
 GifWrapper.Grid = GifGrid;
 GifWrapper.Carousel = GifCarousel;
+GifWrapper.EmojiGrid = EmojiGrid;
 
 export default GifWrapper;

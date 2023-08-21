@@ -2,7 +2,7 @@
 import {Input, Stack} from '@mui/material';
 import Link from 'next/link';
 
-import GifWrapper from './Giphy/GifWrapper';
+import GifWrapper from './giphy/GifWrapper';
 
 const Header = () => {
   return (
