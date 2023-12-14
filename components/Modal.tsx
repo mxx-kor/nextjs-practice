@@ -1,4 +1,5 @@
 'use client';
+import {Box, Container} from '@mui/material';
 import {useRouter} from 'next/navigation';
 import {MouseEventHandler, useCallback, useEffect, useRef} from 'react';
 
@@ -13,11 +14,11 @@ export default function Modal({children}: {children: React.ReactNode}) {
 
   const onClick: MouseEventHandler = useCallback(
     (e) => {
-      if (e.target === overlay.current || e.target === wrapper.current) {
+      if (e.target === overlay.current) {
         if (onDismiss) onDismiss();
       }
     },
-    [onDismiss, overlay, wrapper],
+    [onDismiss, overlay],
   );
 
   const onKeyDown = useCallback(
@@ -33,17 +34,29 @@ export default function Modal({children}: {children: React.ReactNode}) {
   }, [onKeyDown]);
 
   return (
-    <div
+    <Box
       ref={overlay}
-      className='fixed z-10 left-0 right-0 top-0 bottom-0 mx-auto bg-black/60'
+      sx={{
+        position: 'fixed',
+        inset: 0,
+        textAlign: 'center',
+        zIndex: 10,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      }}
       onClick={onClick}
     >
-      <div
+      <Container
+        maxWidth='xs'
         ref={wrapper}
-        className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full sm:w-10/12 md:w-8/12 lg:w-1/2 p-6'
+        sx={{
+          paddingY: '40px',
+          marginTop: '15rem',
+          backgroundColor: '#323131',
+          borderRadius: '10px',
+        }}
       >
         {children}
-      </div>
-    </div>
+      </Container>
+    </Box>
   );
 }
