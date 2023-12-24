@@ -21,6 +21,9 @@ const Header = () => {
         </Link>
         <Input />
         <Stack direction='row' gap={3}>
+          <Link className={styles.headerNav} href='/chat'>
+            <h2>chat</h2>
+          </Link>
           <Link className={styles.headerNav} href='/about'>
             <h2>about</h2>
           </Link>
