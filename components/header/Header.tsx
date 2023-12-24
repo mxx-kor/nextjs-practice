@@ -1,5 +1,5 @@
 'use client';
-import {Input, Stack} from '@mui/material';
+import {Stack} from '@mui/material';
 import Link from 'next/link';
 
 import GifWrapper from '../giphy/GifWrapper';
@@ -14,13 +14,13 @@ const Header = () => {
         alignItems='center'
         marginBottom={5}
       >
-        <Link href='/'>
-          <GifWrapper>
-            <GifWrapper.Gif />
-          </GifWrapper>
-        </Link>
-        <Input />
+        <GifWrapper>
+          <GifWrapper.Gif />
+        </GifWrapper>
         <Stack direction='row' gap={3}>
+          <Link className={styles.headerNav} href='/'>
+            <h2>Home</h2>
+          </Link>
           <Link className={styles.headerNav} href='/chat'>
             <h2>chat</h2>
           </Link>
