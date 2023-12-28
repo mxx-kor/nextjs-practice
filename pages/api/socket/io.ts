@@ -3,17 +3,12 @@ import {Socket} from 'net';
 import {NextApiRequest, NextApiResponse} from 'next';
 import {Server as ServerIO} from 'socket.io';
 
-import {
-  ClientToServerEvents,
-  InterServerEvents,
-  ServerToClientEvents,
-  SocketData,
-} from '@/types/socket';
+import {ServerToClientEvents} from '@/types/socket';
 
 export type NextApiResponseServerIO = NextApiResponse & {
   socket: Socket & {
     server: NetServer & {
-      io: ServerIO;
+      io: ServerIO<ServerToClientEvents>;
     };
   };
 };
@@ -21,15 +16,11 @@ export type NextApiResponseServerIO = NextApiResponse & {
 const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIO) => {
   if (!res.socket.server.io) {
     const httpServer = res.socket.server as NetServer;
-    const io = new ServerIO<
-      ClientToServerEvents,
-      ServerToClientEvents,
-      InterServerEvents,
-      SocketData
-    >(httpServer, {
+    const io = new ServerIO(httpServer, {
       path: '/api/socket/io',
       addTrailingSlash: false,
     });
+
     res.socket.server.io = io;
   }
 

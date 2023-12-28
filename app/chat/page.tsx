@@ -4,23 +4,12 @@ import {Button, TextField} from '@mui/material';
 import {useEffect, useState} from 'react';
 
 import {useSocket} from '@/components/provider/SocketProvider';
-
-export interface IMessage {
-  user: string;
-  content: string;
-}
+import {IMessage} from '@/types/chat';
 
 const Chat = () => {
   const {socket} = useSocket();
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [currentMessage, setCurrentMessage] = useState<string>('');
-
-  useEffect(() => {
-    socket?.on('message', (message: IMessage) => {
-      messages.push(message);
-      setMessages([...messages]);
-    });
-  }, [socket]);
 
   const sendMessage = async () => {
     if (currentMessage) {
@@ -35,6 +24,15 @@ const Chat = () => {
       if (res.ok) setCurrentMessage('');
     }
   };
+
+  useEffect(() => {
+    socket?.on('message', (message: IMessage) => {
+      messages.push(message);
+      setMessages([...messages]);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket]);
+
   return (
     <div>
       {messages.map((message, index) => (
