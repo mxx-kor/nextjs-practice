@@ -1,15 +1,21 @@
 'use client';
-import {Box, Button, Grid, Link, TextField} from '@mui/material';
+
+import {Box, Button, TextField, Typography} from '@mui/material';
+import {useRouter} from 'next/navigation';
 import {FormEvent} from 'react';
 
+import {useAuth} from './provider/AuthProvider';
+
 const SigninForm = () => {
+  const {login} = useAuth();
+  const router = useRouter();
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const username = data.get('username') as string;
+    login(username);
+    router.back();
   };
 
   return (
@@ -18,38 +24,20 @@ const SigninForm = () => {
         margin='normal'
         required
         fullWidth
-        id='email'
-        label='Email'
-        name='email'
+        id='username'
+        label='User Name'
+        name='username'
         autoComplete='off'
         autoFocus
-      />
-      <TextField
-        margin='normal'
-        required
-        fullWidth
-        defaultValue=''
-        name='password'
-        label='Password'
-        type='password'
-        id='password'
-        autoComplete='off'
       />
       <Button type='submit' fullWidth variant='contained' sx={{mt: 3, mb: 2}}>
         Sign In
       </Button>
-      <Grid container>
-        <Grid item xs>
-          <Link href='#' variant='body2'>
-            Forgot password?
-          </Link>
-        </Grid>
-        <Grid item>
-          <Link href='#' variant='body2'>
-            {"Don't have an account? Sign Up"}
-          </Link>
-        </Grid>
-      </Grid>
+      <Typography color='grey'>
+        {
+          "you don't need to sign up, enter user name for chat service that's it 😌"
+        }
+      </Typography>
     </Box>
   );
 };

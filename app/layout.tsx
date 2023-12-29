@@ -2,6 +2,7 @@ import {Container} from '@mui/material';
 import {Inter} from 'next/font/google';
 
 import Header from '@/components/header/Header';
+import {AuthProvider} from '@/components/provider/AuthProvider';
 
 import ThemeRegistry from './ThemeRegistry';
 
@@ -17,14 +18,16 @@ export default function RootLayout(props: {
   modal: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
+    <html lang='ko'>
       <body className={inter.className}>
         <ThemeRegistry options={{key: 'mui'}}>
-          <Container maxWidth='md'>
-            <Header />
-            {props.children}
-            {props.modal}
-          </Container>
+          <AuthProvider>
+            <Container maxWidth='md'>
+              <Header />
+              {props.children}
+              {props.modal}
+            </Container>
+          </AuthProvider>
         </ThemeRegistry>
       </body>
     </html>
