@@ -30,8 +30,10 @@ const Header = () => {
             Logout
           </Button>
         ) : (
-          <Link className={styles.headerNav} href='/login'>
-            <h2>login</h2>
+          <Link href='/login' passHref>
+            <Button size='small' color='info' variant='contained'>
+              Login
+            </Button>
           </Link>
         )}
       </Stack>

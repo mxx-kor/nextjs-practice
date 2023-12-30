@@ -1,4 +1,4 @@
-import {Stack} from '@mui/material';
+import {Container, Stack} from '@mui/material';
 
 import {SocketProvider} from '@/components/provider/SocketProvider';
 import SocketIndicator from '@/components/SocketIndicator';
@@ -11,11 +11,13 @@ interface LayoutProps {
 const Layout = (props: LayoutProps) => {
   return (
     <SocketProvider>
-      <Stack direction='row'>
+      <Stack direction='row' alignItems='center' justifyContent='space-between'>
         <Title backNav={true} />
         <SocketIndicator />
       </Stack>
-      <main>{props.children}</main>
+      <Container maxWidth='sm'>
+        <main>{props.children}</main>
+      </Container>
     </SocketProvider>
   );
 };

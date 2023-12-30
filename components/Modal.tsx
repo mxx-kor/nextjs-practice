@@ -1,4 +1,5 @@
 'use client';
+
 import {Box, Container} from '@mui/material';
 import {useRouter} from 'next/navigation';
 import {MouseEventHandler, useCallback, useEffect, useRef} from 'react';
@@ -29,8 +30,8 @@ export default function Modal({children}: {children: React.ReactNode}) {
   );
 
   useEffect(() => {
-    document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
   }, [onKeyDown]);
 
   return (
@@ -49,10 +50,10 @@ export default function Modal({children}: {children: React.ReactNode}) {
         maxWidth='xs'
         ref={wrapper}
         sx={{
-          paddingY: '40px',
+          paddingY: '4rem',
           marginTop: '15rem',
           backgroundColor: '#323131',
-          borderRadius: '10px',
+          borderRadius: '1rem',
         }}
       >
         {children}

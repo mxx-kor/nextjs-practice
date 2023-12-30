@@ -1,7 +1,7 @@
 'use client';
 
-import {Button, Stack, TextField} from '@mui/material';
-import {useEffect, useState} from 'react';
+import {Box, Button, Stack, TextField, Typography} from '@mui/material';
+import {Fragment, useEffect, useState} from 'react';
 
 import {useAuth} from '@/components/provider/AuthProvider';
 import {useSocket} from '@/components/provider/SocketProvider';
@@ -29,8 +29,7 @@ const Chat = () => {
 
   useEffect(() => {
     socket?.on('message', (message: IMessage) => {
-      messages.push(message);
-      setMessages([...messages]);
+      setMessages((prev) => [...prev, message]);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
@@ -44,12 +43,43 @@ const Chat = () => {
   });
 
   return (
-    <div>
-      <h2>{username}</h2>
+    <Box>
       {messages.map((message, index) => (
-        <div key={index}>
-          <span>{message.user}</span>: <span>{message.content}</span>
-        </div>
+        <Fragment key={index}>
+          {message.user === username ? (
+            <Box textAlign='end'>
+              <Typography
+                sx={{
+                  display: 'inline-block',
+                  borderRadius: '0.5rem',
+                  backgroundColor: '#BEF0AE',
+                  padding: '0.5rem',
+                  marginBottom: '1rem',
+                  color: 'black',
+                }}
+              >
+                {message.content}
+              </Typography>
+            </Box>
+          ) : (
+            <Box>
+              <Typography variant='overline' sx={{display: 'block'}}>
+                {message.user}
+              </Typography>
+              <Typography
+                sx={{
+                  display: 'inline-block',
+                  borderRadius: '5px',
+                  backgroundColor: '#746d69',
+                  padding: '5px',
+                  color: 'white',
+                }}
+              >
+                {message.content}
+              </Typography>
+            </Box>
+          )}
+        </Fragment>
       ))}
       <Stack direction='row' justifyContent='center'>
         <TextField
@@ -65,7 +95,7 @@ const Chat = () => {
           Send
         </Button>
       </Stack>
-    </div>
+    </Box>
   );
 };
 
