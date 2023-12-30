@@ -1,10 +1,11 @@
 'use client';
 
-import {Box, Button, Stack, TextField, Typography} from '@mui/material';
+import {Box, Button, Slide, Stack, TextField, Typography} from '@mui/material';
 import {Fragment, useEffect, useState} from 'react';
 
 import {useAuth} from '@/components/provider/AuthProvider';
 import {useSocket} from '@/components/provider/SocketProvider';
+import useMounted from '@/hooks/useMounted';
 import {IMessage} from '@/types/chat';
 
 const Chat = () => {
@@ -12,6 +13,7 @@ const Chat = () => {
   const {username, isLogin} = useAuth();
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [currentMessage, setCurrentMessage] = useState<string>('');
+  const {isMounted} = useMounted();
 
   const sendMessage = async () => {
     if (currentMessage) {
@@ -47,37 +49,41 @@ const Chat = () => {
       {messages.map((message, index) => (
         <Fragment key={index}>
           {message.user === username ? (
-            <Box textAlign='end'>
-              <Typography
-                sx={{
-                  display: 'inline-block',
-                  borderRadius: '0.5rem',
-                  backgroundColor: '#BEF0AE',
-                  padding: '0.5rem',
-                  marginBottom: '1rem',
-                  color: 'black',
-                }}
-              >
-                {message.content}
-              </Typography>
-            </Box>
+            <Slide direction='left' in={isMounted} mountOnEnter unmountOnExit>
+              <Box textAlign='end'>
+                <Typography
+                  sx={{
+                    display: 'inline-block',
+                    borderRadius: '0.5rem',
+                    backgroundColor: '#BEF0AE',
+                    padding: '0.5rem',
+                    marginBottom: '1rem',
+                    color: 'black',
+                  }}
+                >
+                  {message.content}
+                </Typography>
+              </Box>
+            </Slide>
           ) : (
-            <Box>
-              <Typography variant='overline' sx={{display: 'block'}}>
-                {message.user}
-              </Typography>
-              <Typography
-                sx={{
-                  display: 'inline-block',
-                  borderRadius: '5px',
-                  backgroundColor: '#746d69',
-                  padding: '5px',
-                  color: 'white',
-                }}
-              >
-                {message.content}
-              </Typography>
-            </Box>
+            <Slide direction='right' in={isMounted} mountOnEnter unmountOnExit>
+              <Box>
+                <Typography variant='overline' sx={{display: 'block'}}>
+                  {message.user}
+                </Typography>
+                <Typography
+                  sx={{
+                    display: 'inline-block',
+                    borderRadius: '5px',
+                    backgroundColor: '#746d69',
+                    padding: '5px',
+                    color: 'white',
+                  }}
+                >
+                  {message.content}
+                </Typography>
+              </Box>
+            </Slide>
           )}
         </Fragment>
       ))}
