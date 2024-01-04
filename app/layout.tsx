@@ -3,6 +3,7 @@ import {Inter} from 'next/font/google';
 
 import Header from '@/components/header/Header';
 import {AuthProvider} from '@/components/provider/AuthProvider';
+import NextAuthProvider from '@/components/provider/NextAuthProvider';
 
 import ThemeRegistry from './ThemeRegistry';
 
@@ -21,13 +22,15 @@ export default function RootLayout(props: {
     <html lang='ko'>
       <body className={inter.className}>
         <ThemeRegistry options={{key: 'mui'}}>
-          <AuthProvider>
-            <Container maxWidth='md'>
-              <Header />
-              {props.children}
-              {props.modal}
-            </Container>
-          </AuthProvider>
+          <NextAuthProvider>
+            <AuthProvider>
+              <Container maxWidth='md'>
+                <Header />
+                {props.children}
+                {props.modal}
+              </Container>
+            </AuthProvider>
+          </NextAuthProvider>
         </ThemeRegistry>
       </body>
     </html>
