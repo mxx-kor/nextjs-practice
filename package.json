@@ -16,6 +16,7 @@
     "@giphy/react-components": "^8.1.0",
     "@mui/material": "^5.14.5",
     "next": "13.4.12",
+    "next-auth": "^4.24.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "socket.io": "^4.7.2",
