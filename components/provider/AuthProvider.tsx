@@ -1,5 +1,6 @@
 'use client';
 
+import {signOut, useSession} from 'next-auth/react';
 import {createContext, useContext, useEffect, useState} from 'react';
 
 interface IAuthContext {
@@ -21,6 +22,7 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({children}: {children: React.ReactNode}) => {
+  const {data, status} = useSession();
   const [username, setUsername] = useState('');
   const [isLogin, setIsLogin] = useState(false);
 
@@ -29,8 +31,24 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
   };
 
   const logout = () => {
-    setUsername('');
+    if (status === 'authenticated') {
+      signOut();
+    }
+    if (status === 'unauthenticated') {
+      setUsername('');
+    }
   };
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      const kakaoUsername = data.user?.name as string;
+      setUsername(kakaoUsername);
+    }
+    if (status === 'unauthenticated') {
+      setUsername('');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
 
   useEffect(() => {
     username ? setIsLogin(true) : setIsLogin(false);

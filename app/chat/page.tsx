@@ -77,6 +77,7 @@ const Chat = () => {
                     borderRadius: '5px',
                     backgroundColor: '#746d69',
                     padding: '5px',
+                    marginBottom: '1rem',
                     color: 'white',
                   }}
                 >

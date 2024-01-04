@@ -4,6 +4,7 @@ import {Box, Button, TextField, Typography} from '@mui/material';
 import {useRouter} from 'next/navigation';
 import {FormEvent} from 'react';
 
+import KakaoLogin from './KakaoLogin';
 import {useAuth} from './provider/AuthProvider';
 
 const SigninForm = () => {
@@ -20,6 +21,11 @@ const SigninForm = () => {
 
   return (
     <Box component='form' noValidate onSubmit={handleSubmit} sx={{mt: 1}}>
+      <Typography color='grey'>
+        {
+          "you don't need to sign up, enter user name for chat service that's it 😌"
+        }
+      </Typography>
       <TextField
         margin='normal'
         required
@@ -33,11 +39,7 @@ const SigninForm = () => {
       <Button type='submit' fullWidth variant='contained' sx={{mt: 3, mb: 2}}>
         Sign In
       </Button>
-      <Typography color='grey'>
-        {
-          "you don't need to sign up, enter user name for chat service that's it 😌"
-        }
-      </Typography>
+      <KakaoLogin />
     </Box>
   );
 };
