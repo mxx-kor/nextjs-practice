@@ -2,12 +2,12 @@
 
 import {Button, Stack} from '@mui/material';
 import Link from 'next/link';
+import {signOut, useSession} from 'next-auth/react';
 
-import {useAuth} from '../provider/AuthProvider';
 import styles from './Header.module.css';
 
 const Header = () => {
-  const {isLogin, logout} = useAuth();
+  const {status} = useSession();
   return (
     <header>
       <Stack direction='row' gap={3} alignItems='center'>
@@ -20,12 +20,12 @@ const Header = () => {
         <Link className={styles.headerNav} href='/about'>
           <h2>about</h2>
         </Link>
-        {isLogin ? (
+        {status === 'authenticated' ? (
           <Button
             size='small'
             color='secondary'
             variant='contained'
-            onClick={logout}
+            onClick={() => signOut()}
           >
             Logout
           </Button>

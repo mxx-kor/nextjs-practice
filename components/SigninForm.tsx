@@ -2,20 +2,19 @@
 
 import {Box, Button, TextField, Typography} from '@mui/material';
 import {useRouter} from 'next/navigation';
+import {signIn} from 'next-auth/react';
 import {FormEvent} from 'react';
 
 import KakaoLogin from './KakaoLogin';
-import {useAuth} from './provider/AuthProvider';
 
 const SigninForm = () => {
-  const {login} = useAuth();
   const router = useRouter();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const username = data.get('username') as string;
-    login(username);
+    signIn('credentials', {username});
     router.back();
   };
 

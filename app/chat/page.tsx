@@ -1,26 +1,28 @@
 'use client';
 
 import {Box, Button, Slide, Stack, TextField, Typography} from '@mui/material';
+import {useSession} from 'next-auth/react';
 import {Fragment, useEffect, useState} from 'react';
 
-import {useAuth} from '@/components/provider/AuthProvider';
 import {useSocket} from '@/components/provider/SocketProvider';
 import useMounted from '@/hooks/useMounted';
 import {IMessage} from '@/types/chat';
 
 const Chat = () => {
   const {socket} = useSocket();
-  const {username, isLogin} = useAuth();
+  const {data, status} = useSession();
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [currentMessage, setCurrentMessage] = useState<string>('');
   const {isMounted} = useMounted();
+  const isLogin = status === 'authenticated';
 
   const sendMessage = async () => {
     if (currentMessage) {
       const res = await fetch('/api/chat', {
         method: 'POST',
         body: JSON.stringify({
-          user: username,
+          username: data?.user?.name,
+          userId: data?.user.id,
           content: currentMessage,
         }),
       });
@@ -48,7 +50,7 @@ const Chat = () => {
     <Box>
       {messages.map((message, index) => (
         <Fragment key={index}>
-          {message.user === username ? (
+          {message.id === data?.user?.sub ? (
             <Slide direction='left' in={isMounted} mountOnEnter unmountOnExit>
               <Box textAlign='end'>
                 <Typography
@@ -69,7 +71,7 @@ const Chat = () => {
             <Slide direction='right' in={isMounted} mountOnEnter unmountOnExit>
               <Box>
                 <Typography variant='overline' sx={{display: 'block'}}>
-                  {message.user}
+                  {message.name}
                 </Typography>
                 <Typography
                   sx={{
