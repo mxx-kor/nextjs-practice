@@ -4,6 +4,8 @@ import {Button, Stack} from '@mui/material';
 import Link from 'next/link';
 import {signOut, useSession} from 'next-auth/react';
 
+import {saveRedirectInfo} from '@/utils/redirect';
+
 import styles from './Header.module.css';
 
 const Header = () => {
@@ -31,7 +33,12 @@ const Header = () => {
           </Button>
         ) : (
           <Link href='/login' passHref>
-            <Button size='small' color='info' variant='contained'>
+            <Button
+              size='small'
+              color='info'
+              variant='contained'
+              onClick={saveRedirectInfo}
+            >
               Login
             </Button>
           </Link>
