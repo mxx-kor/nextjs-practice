@@ -50,7 +50,7 @@ const Chat = () => {
     <Box>
       {messages.map((message, index) => (
         <Fragment key={index}>
-          {message.id === data?.user?.sub ? (
+          {message.userId === data?.user?.sub ? (
             <Slide direction='left' in={isMounted} mountOnEnter unmountOnExit>
               <Box textAlign='end'>
                 <Typography
@@ -71,7 +71,7 @@ const Chat = () => {
             <Slide direction='right' in={isMounted} mountOnEnter unmountOnExit>
               <Box>
                 <Typography variant='overline' sx={{display: 'block'}}>
-                  {message.name}
+                  {message.username}
                 </Typography>
                 <Typography
                   sx={{

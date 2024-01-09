@@ -1,6 +1,11 @@
 import {Card, Divider} from '@mui/material';
 
-//SSG
+import {Post} from '@/types/post';
+
+// it was SSG but when I build the app Next.js couldn't handle Route Handlers
+// so I change it to SSR with dynamic variables
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'about my app',
   description: '저희 팀과 통계를 소개합니다.',
@@ -14,11 +19,11 @@ const getPosts = async () => {
     throw new Error('Failed to fetch data');
   }
 
-  return (await res.json()) as Post[];
+  return res.json();
 };
 
 const About = async () => {
-  const posts = await getPosts();
+  const posts: Post[] = await getPosts();
 
   return (
     <main>
