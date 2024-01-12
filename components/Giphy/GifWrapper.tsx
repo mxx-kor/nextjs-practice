@@ -1,3 +1,5 @@
+'use client';
+
 import {IGif} from '@giphy/js-types';
 import {
   createContext,
