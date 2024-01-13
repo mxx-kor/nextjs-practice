@@ -22,6 +22,9 @@ const Header = () => {
         <Link className={styles.headerNav} href='/about'>
           <h2>about</h2>
         </Link>
+        <Link className={styles.headerNav} href='/ssr-photos'>
+          <h2>SSR Photos</h2>
+        </Link>
         {status === 'authenticated' ? (
           <Button
             size='small'

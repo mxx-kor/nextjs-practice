@@ -3,9 +3,8 @@ import {Inter} from 'next/font/google';
 
 import Header from '@/components/header/Header';
 import NextAuthProvider from '@/components/provider/NextAuthProvider';
-import Providers from '@/components/provider/QueryProvider';
-
-import ThemeRegistry from './ThemeRegistry';
+import QueryProvider from '@/components/provider/QueryProvider';
+import ThemeRegistry from '@/components/provider/ThemeRegistry';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -21,7 +20,7 @@ export default function RootLayout(props: {
   return (
     <html lang='ko'>
       <body className={inter.className}>
-        <Providers>
+        <QueryProvider>
           <ThemeRegistry options={{key: 'mui'}}>
             <NextAuthProvider>
               <Container maxWidth='md'>
@@ -31,7 +30,7 @@ export default function RootLayout(props: {
               </Container>
             </NextAuthProvider>
           </ThemeRegistry>
-        </Providers>
+        </QueryProvider>
       </body>
     </html>
   );
