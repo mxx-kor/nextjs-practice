@@ -1,5 +1,8 @@
+import {Stack} from '@mui/material';
 import {dehydrate, HydrationBoundary} from '@tanstack/react-query';
 
+import Check from '@/components/Check';
+import PhotoCard from '@/components/PhotoCard';
 import {PhotoType} from '@/types/photo';
 
 import {getPhotos} from '../api/photos/photos';
@@ -16,9 +19,12 @@ const SSRPhotos = async () => {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      {photos?.map((photo) => (
-        <p key={photo.id}>{photo.title}</p>
-      ))}
+      <Stack gap={5} maxWidth='40rem' sx={{margin: '0 auto'}}>
+        <Check />
+        {photos?.slice(0, 10).map((photo) => (
+          <PhotoCard key={photo.id} {...photo} />
+        ))}
+      </Stack>
     </HydrationBoundary>
   );
 };
