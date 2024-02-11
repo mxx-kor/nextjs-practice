@@ -1,5 +1,3 @@
-import Title from '@/components/Title';
-
 interface LayoutProps {
   children: React.ReactNode;
   analytics: React.ReactNode;
@@ -9,12 +7,9 @@ interface LayoutProps {
 const Layout = (props: LayoutProps) => {
   return (
     <>
-      <Title backNav={true} />
-      <main>
-        {props.children}
-        {props.team}
-        {props.analytics}
-      </main>
+      {props.children}
+      {props.team}
+      {props.analytics}
     </>
   );
 };

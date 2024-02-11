@@ -1,4 +1,4 @@
-import Title from '@/components/Title';
+import BackButton from '@/components/BackButton';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface LayoutProps {
 const Layout = (props: LayoutProps) => {
   return (
     <>
-      <Title backNav={true} />
+      <BackButton />
       <main>{props.children}</main>
     </>
   );

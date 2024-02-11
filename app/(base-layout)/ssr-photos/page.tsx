@@ -5,8 +5,8 @@ import Check from '@/components/Check';
 import PhotoCard from '@/components/PhotoCard';
 import {PhotoType} from '@/types/photo';
 
-import {getPhotos} from '../api/photos/photos';
-import getQueryClient from '../getQueryClient';
+import {getPhotos} from '../../api/photos/photos';
+import getQueryClient from '../../getQueryClient';
 
 // using <Hydrate>
 const SSRPhotos = async () => {
