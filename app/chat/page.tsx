@@ -100,7 +100,7 @@ const Chat = () => {
           value={currentMessage}
           onChange={(e) => setCurrentMessage(e.target.value)}
         />
-        <Button variant='outlined' onClick={sendMessage}>
+        <Button variant='outlined' disabled={!isLogin} onClick={sendMessage}>
           Send
         </Button>
       </Stack>
