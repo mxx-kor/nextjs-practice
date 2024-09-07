@@ -21,6 +21,7 @@
     "@tanstack/react-query-devtools": "^5.17.9",
     "next": "13.4.12",
     "next-auth": "^4.24.5",
+    "next-intl": "^3.19.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "socket.io": "^4.7.2",
